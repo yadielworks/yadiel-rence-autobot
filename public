@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TERRENCE AUTOBOT</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+  <style>
+    body {
+      padding: 20px;
+      background-color: #0e0e0e;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: rgba(26, 26, 26, 0.8);
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 6px 6px rgba(0, 0, 0, 0.23);
+      padding: 40px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    h1, h2 {
+      color: #fff;
+      text-align: center;
+    }
+
+    .version {
+      color: red;
+      font-size: 0.8rem;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    label {
+      color: #ccc;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .centered-textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      margin-bottom: 20px;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+      height: 200px;
+      font-size: 1rem;
+    }
+
+    .centered-textarea:focus {
+      border-color: violet;
+    }
+
+    .centered-input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      margin-bottom: 20px;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .centered-input:focus {
+      border-color: violet;
+    }
+
+    .btn-primary {
+      background-color: #808080;
+      border: none;
+      color: #FF0000;
+      padding: 12px 24px;
+      font-size: 1rem;
+      cursor: pointer;
+      display: block;
+      width: 100%;
+      text-align: center;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #808080;
+    }
+
+    .footer {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 10px;
+      text-align: center;
+      font-size: 16px;
+      color: red;
+      margin-top: 50px;
+      border-top: 1px solid red;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    .footer p {
+      margin: 0;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-content {
+      background-color: #333;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 800px;
+      border-radius: 10px;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .command-item, .session-item {
+      background-color: rgba(0, 0, 0, 0.6);
+      border: 1px solid #444;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .command-item:hover, .session-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .command-name, .session-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #00f;
+    }
+
+    .command-description, .session-description {
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .pagination button {
+      background-color: #000000;
+      border: none;
+      color: #FF0000;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .pagination button:hover {
+      background-color: #808080;
+    }
+
+    .pagination button:disabled {
+      background-color: #808080;
+      cursor: not-allowed;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Welcome to the NASHBOT</h1>
+    <span class="version">version 2.0</span>
+    <div class="form-container">
+      <form id="loginForm" class="login-form">
+        <label for="botState">Bot State:</label>
+        <textarea id="botState" class="centered-textarea" rows="10" placeholder="Paste your facebook appstate here..." required></textarea>
+        
+        <label for="prefix">Prefix: example: /</label>
+        <input type="text" id="prefix" class="centered-input" placeholder="Enter command prefix..." required>
+        
+        <button type="submit" class="btn-primary">Login</button>
+      </form>
+    </div>
+
+    <button id="openModal" class="btn-primary" style="margin-top: 20px;">Show Commands & Active Sessions</button>
+
+    <div id="commandModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Commands</h2>
+        <ul id="commands">
+        </ul>
+        <div class="pagination">
+          <button id="prevPage" disabled>Previous</button>
+          <button id="nextPage">Next</button>
+        </div>
+        <h2 style="margin-top: 40px;">Active Sessions</h2>
+        <ul id="sessionList">
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2024 Cris Terrence Mendoza. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginForm = document.getElementById('loginForm');
+      const botStateInput = document.getElementById('botState');
+      const prefixInput = document.getElementById('prefix');
+      const commandList = document.getElementById('commands');
+      const sessionList = document.getElementById('sessionList');
+      const commandModal = document.getElementById('commandModal');
+      const openModalButton = document.getElementById('openModal');
+      const closeModalButton = document.querySelector('.close');
+
+      const prevPageButton = document.getElementById('prevPage');
+      const nextPageButton = document.getElementById('nextPage');
+
+      let currentPage = 1;
+      const commandsPerPage = 5;
+      let commandsData = [];
+
+      loginForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const botState = botStateInput.value.trim();
+        const prefix = prefixInput.value.trim();
+
+        if (!botState || !prefix) {
+          alert('Bot state and prefix are required.');
+          return;
+        }
+
+        try {
+          const response = await fetch('/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ botState, prefix }),
+          });
+
+          if (!response.ok) {
+            throw new Error('Failed to login');
+          }
+
+          botStateInput.value = '';
+          prefixInput.value = '';
+
+          alert('Logged in successfully!');
+          
+          fetchCommands();
+          fetchActiveSessions();
+        } catch (error) {
+          console.error('Error logging in:', error);
+          alert('Failed to login. Please try again.');
+        }
+      });
+
+      async function fetchCommands() {
+        try {
+          const response = await fetch('/commands');
+          if (!response.ok) {
+            throw new Error('Failed to fetch commands');
+          }
+          const commands = await response.json();
+          commandsData = Object.keys(commands).map((name) => ({
+            name,
+            description: commands[name].description,
+          }));
+          displayCommands();
+        } catch (error) {
+          console.error('Error fetching commands:', error);
+          alert('Failed to fetch commands. Please try again.');
+        }
+      }
+
+      function displayCommands() {
+        commandList.innerHTML = '';
+
+        const startIndex = (currentPage - 1) * commandsPerPage;
+        const endIndex = startIndex + commandsPerPage;
+        const currentCommands = commandsData.slice(startIndex, endIndex);
+
+        currentCommands.forEach((command) => {
+          const li = document.createElement('li');
+          li.className = 'command-item';
+          li.innerHTML = `
+            <div class="command-name">${command.name}</div>
+            <div class="command-description">${command.description}</div>
+          `;
+          commandList.appendChild(li);
+        });
+
+        prevPageButton.disabled = currentPage === 1;
+        nextPageButton.disabled = endIndex >= commandsData.length;
+      }
+
+      prevPageButton.addEventListener('click', () => {
+        currentPage--;
+        displayCommands();
+      });
+
+      nextPageButton.addEventListener('click', () => {
+        currentPage++;
+        displayCommands();
+      });
+
+      async function fetchActiveSessions() {
+        try {
+          const response = await fetch('/active-sessions');
+          if (!response.ok) {
+            throw new Error('Failed to fetch active sessions');
+          }
+          const sessions = await response.json();
+          displayActiveSessions(sessions);
+        } catch (error) {
+          console.error('Error fetching active sessions:', error);
+          alert('Failed to fetch active sessions. Please try again.');
+        }
+      }
+
+      openModalButton.addEventListener('click', () => {
+        commandModal.style.display = 'block';
+      });
+
+      closeModalButton.addEventListener('click', () => {
+        commandModal.style.display = 'none';
+      });
+
+      window.addEventListener('click', (event) => {
+        if (event.target === commandModal) {
+          commandModal.style.display = 'none';
+        }
+      });
+
+      fetchCommands();
+      fetchActiveSessions();
+    });
+  </script>
+</body>
+</html>
