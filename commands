@@ -31,7 +31,7 @@ module.exports = {
             const options = { timeZone: 'Asia/Manila', hour12: true };
             const timeString = new Date().toLocaleString('en-US', options);
 
-            const finalResponse = `𝙍𝙀𝙎𝙋𝙊𝙉𝘿 𝘼𝙄 🤖\n━━━━━━━━━━━━━━━━━━━\n𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻: ${input}\n━━━━━━━━━━━━━━━━━━━\n𝗔𝗻𝘀𝘄𝗲𝗿: ${response}\n\n𝗣⃪𝗼⃪𝗴⃪𝗶⃪: ${timeString}\n\nMAKE YOUR OWN BOT HERE: https://nash-fb-bot-v-2.replit.app/`;
+            const finalResponse = `𝙍𝙀𝙎𝙋𝙊𝙉𝘿 𝘼𝙄 🤖\n━━━━━━━━━━━━━━━━━━━\n𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻: ${input}\n━━━━━━━━━━━━━━━━━━━\n𝗔𝗻𝘀𝘄𝗲𝗿: ${response}\n\n𝗣⃪𝗼⃪𝗴⃪𝗶⃪: ${timeString}\n\nDO ADD MY OWNER : facebook.com/100061763347810`;
             api.sendMessage(finalResponse, event.threadID, event.messageID);
         } catch (error) {
             let errorMessage = 'An error occurred while processing your request, please try sending your question again.';
